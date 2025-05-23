@@ -9,8 +9,11 @@ workflows:
         script: |
           cd ios
           pod install
-      - flutter build ios --simulator
-      - mkdir -p build/ios/ipa
-      - zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
+      - name: Build iOS simulator
+        script: flutter build ios --simulator
+      - name: Zip App
+        script: |
+          mkdir -p build/ios/ipa
+          zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
     artifacts:
       - build/ios/ipa/Runner.app.zip
