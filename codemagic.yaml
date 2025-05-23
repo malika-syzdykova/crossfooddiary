@@ -4,9 +4,24 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+
     scripts:
-      - flutter build ios --simulator
-      - mkdir -p build/ios/ipa
-      - zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
+      - name: 🔍 Check Flutter environment
+        script: flutter doctor -v
+
+      - name: 📦 Install dependencies
+        script: flutter pub get
+
+      - name: 🧹 Clean previous builds
+        script: flutter clean
+
+      - name: 🏗️ Build iOS app for Simulator
+        script: flutter build ios --simulator
+
+      - name: 📁 Package Runner.app into .zip
+        script: |
+          mkdir -p build/ios/ipa
+          zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
+
     artifacts:
       - build/ios/ipa/Runner.app.zip
