@@ -1,20 +1,16 @@
 workflows:
-  ios-simulator-build:
-    name: iOS Simulator Build
+  ios-release-no-shorebird:
+    name: iOS Release
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Install dependencies
+      - name: Install CocoaPods
         script: |
-          flutter pub get
           cd ios
           pod install
-      - name: Build for iOS simulator
-        script: flutter build ios --simulator
-      - name: Archive the built .app
-        script: |
-          mkdir -p build/ios/ipa
-          zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
+      - flutter build ios --simulator
+      - mkdir -p build/ios/ipa
+      - zip -r build/ios/ipa/Runner.app.zip build/ios/iphonesimulator/Runner.app
     artifacts:
       - build/ios/ipa/Runner.app.zip
