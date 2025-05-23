@@ -17,7 +17,7 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_localizations:
     sdk: flutter
-  intl: ^0.19.0
+  intl: ^0.20.2
 
   # ✅ Новые зависимости для оффлайн-режима
   hive: ^2.2.3
